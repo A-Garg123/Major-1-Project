@@ -1,14 +1,15 @@
 pipeline {
 agent any
    stages {
-      stage('Git Clone') {
-         steps {
-            script {
-               git branch: 'your_branch', credentialsId: 'your_credentials_id', url: 'your_repository_url'
-            }
+     stage('SCM') {
+        checkout scm
+      }
+     stage('SonarQube Analysis') {
+        def scannerHome = tool 'SonarScanner';
+         withSonarQubeEnv() {
+          sh "${scannerHome}/bin/sonar-scanner"
          }
       }
-      
+  }
    
-   } 
 }
