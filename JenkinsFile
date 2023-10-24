@@ -1,0 +1,13 @@
+pipeline {
+   stages {
+      stage('Git Clone') {
+         steps {
+            script {
+               git branch: 'your_branch', credentialsId: 'your_credentials_id', url: 'your_repository_url'
+            }
+         }
+      }
+      
+   
+    
+}
