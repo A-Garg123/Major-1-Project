@@ -16,6 +16,29 @@ pipeline {
              }
             }
         }
+           stage("Verify tooling") {
+         steps {
+            script {
+               sh '''
+                  docker version
+                  docker info
+                  curl --version
+                  jq --version
+               '''
+            }
+         }
+      }
+
+     
+      stage('Start container') {
+         steps {
+            script {
+               sh 'docker build -t app:latest .'
+               sh 'docker run -d -p 3050:3050 app:latest
+
+            }
+         }
+      }
     }
 }
 
