@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     // Run the Docker container
-                    sh 'docker run -d -p 9090:3050 app:latest'
+                    sh 'docker run -it --name App -d -p 3000:3000 app'
                 }
             }
         }
@@ -39,8 +39,8 @@ pipeline {
         always {
             // Clean up: Stop and remove the Docker container
             script {
-                sh 'docker stop $(docker ps -q --filter ancestor=app) || true'
-                sh 'docker rm $(docker ps -a -q --filter ancestor=app) || true'
+                sh 'docker stop $(docker ps -q --filter ancestor=App) || true'
+                sh 'docker rm $(docker ps -a -q --filter ancestor=App) || true'
             }
         }
     }
