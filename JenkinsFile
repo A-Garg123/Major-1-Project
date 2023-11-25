@@ -34,7 +34,7 @@ pipeline {
          steps {
             script {
                sh 'docker build -t app:latest .'
-               sh 'docker run -d -p 3050:3050 app:latest
+               sh 'docker run -d -p 3050:3050 app:latest'
 
             }
          }
